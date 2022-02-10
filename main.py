@@ -22,8 +22,6 @@ def store_db():
 
 
 def store_books():
-    # remove existing db
-    os.remove("data.db")
     store = DiskStorage("data.db")
     books = {
         "crime and punishment": "dostoevsky",
@@ -41,9 +39,10 @@ def store_books():
 
     for k in books.keys():
         print(F"get k={k}, v={store.get(k)}")
+    store.close()
 
 
 if __name__ == '__main__':
-    memory_db()
+    # memory_db()
     store_db()
     store_books()

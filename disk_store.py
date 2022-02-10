@@ -2,7 +2,7 @@ import os.path
 import time
 from typing import Optional
 
-from format import KeyEntry, encode_kv, decode_kv
+from format import KeyEntry, encode_kv, decode_kv, HEADER_SIZE, decode_header
 
 # https://docs.python.org/3.7/tutorial/inputoutput.html#methods-of-file-objects
 DEFAULT_WHENCE = 0
@@ -17,8 +17,7 @@ class DiskStorage:
         # if the file exists already, then we will load the key_dir
         if os.path.exists(file_name):
             self._init_key_dir()
-        else:
-            self.file = open(file_name, 'a+b')
+        self.file = open(file_name, 'a+b')
 
     def set(self, key: str, value: str):
         timestamp = int(time.time())
@@ -40,10 +39,24 @@ class DiskStorage:
 
     def _write(self, data: bytes):
         self.file.write(data)
+        os.fsync(self.file)
 
-    # we will initialise the
+    # we will initialise the key_dir by reading the file
     def _init_key_dir(self):
-        pass
+        print("****----------initialising the database----------****")
+        with open(self.file_name, "rb") as f:
+            while header_bytes := f.read(HEADER_SIZE):
+                timestamp, key_size, value_size = decode_header(data=header_bytes)
+                key_bytes = f.read(key_size)
+                value_bytes = f.read(value_size)
+                key = key_bytes.decode("utf-8")
+                value = value_bytes.decode("utf-8")
+                total_size = HEADER_SIZE + key_size + value_size
+                kv = KeyEntry(timestamp=timestamp, position=self.write_position, total_size=total_size)
+                self.key_dir[key] = kv
+                self.write_position += total_size
+                print(F"loaded k={key}, v={value}")
+        print("****----------initialisation complete----------****")
 
     def close(self):
         os.fsync(self.file)
