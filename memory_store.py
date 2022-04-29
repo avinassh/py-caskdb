@@ -8,3 +8,6 @@ class MemoryStorage:
 
     def get(self, key) -> str:
         return self.data.get(key, "")
+
+    def close(self):
+        pass
