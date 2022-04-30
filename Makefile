@@ -2,10 +2,10 @@ run:
 	python3 example.py
 
 test:
-	python -m unittest discover ./tests -p '*.py'
+	python -m unittest discover -vvv ./tests -p '*.py'
 
 coverage:
-	coverage run -m unittest discover ./tests -p '*.py'
+	coverage run -m unittest discover -vvv ./tests -p '*.py' -b
 	coverage report -m
 
 html: coverage
