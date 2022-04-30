@@ -20,9 +20,6 @@ jobs:
           flake8 .
       - name: format with black
         uses: psf/black@stable
-      - name: run tests
-        run: |
-          python -m unittest discover -vvv ./tests -p '*.py'
       - name: coverage
         run: |
           make coverage
