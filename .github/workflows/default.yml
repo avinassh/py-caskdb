@@ -1,6 +1,6 @@
 name: CDB PR Workflow
 
-on: pull_request
+on: [pull_request]
 
 jobs:
   lint:
