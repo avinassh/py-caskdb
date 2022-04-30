@@ -8,6 +8,7 @@ lint:
 	black --check --diff .
 	flake8 .
 	mypy --strict .
+	pytype .
 
 coverage:
 	coverage run -m unittest discover -vvv ./tests -p '*.py' -b
