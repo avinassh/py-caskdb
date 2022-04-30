@@ -26,7 +26,7 @@ class KeyEntry:
         total_size(int): Total size of bytes of the value
     """
 
-    def __init__(self,timestamp:int,position: int, total_size: int):
+    def __init__(self, timestamp: int, position: int, total_size: int):
         self.timestamp = timestamp
         self.position = position
         self.total_size = total_size
@@ -38,15 +38,14 @@ class KeyEntry:
 #
 # encode_header encodes these values into bytes.
 def encode_header(timestamp: int, key_size: int, value_size: int) -> bytes:
-    return struct.pack(HEADER_FORMAT,timestamp, key_size, value_size)
+    return struct.pack(HEADER_FORMAT, timestamp, key_size, value_size)
 
 
 # for the current key value pair, this method returns the disk encoded bytes along
 # with the size
 def encode_kv(timestamp: int, key: str, value: str) -> tuple[int, bytes]:
     header = encode_header(timestamp, len(key), len(value))
-    data = b"".join([str.encode(key), 
-        str.encode(value)])
+    data = b"".join([str.encode(key), str.encode(value)])
     return HEADER_SIZE + len(data), header + data
 
 
