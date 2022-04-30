@@ -21,7 +21,8 @@ class KeyEntry:
     Args:
         timestamp (int): Timestamp at which we wrote the KV pair to the disk. The value
             is current time in seconds since the epoch.
-        position (int): The position is the byte offset in the file where the data exists
+        position (int): The position is the byte offset in the file where the data
+            exists
         total_size(int): Total size of bytes of the value
     """
 
@@ -40,7 +41,8 @@ def encode_header(timestamp: int, key_size: int, value_size: int) -> bytes:
     return struct.pack(HEADER_FORMAT, timestamp, key_size, value_size)
 
 
-# for the current key value pair, this method returns the disk encoded bytes along with the size
+# for the current key value pair, this method returns the disk encoded bytes along
+# with the size
 def encode_kv(timestamp: int, key: str, value: str) -> tuple[int, bytes]:
     header = encode_header(timestamp, len(key), len(value))
     data = b"".join([str.encode(key), str.encode(value)])

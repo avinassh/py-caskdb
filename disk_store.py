@@ -12,7 +12,8 @@ from format import KeyEntry, encode_kv, decode_kv, HEADER_SIZE, decode_header
 # whence 1 - current cursor position
 # whence 2 - end of the file
 #
-# read more about it here: https://docs.python.org/3.7/tutorial/inputoutput.html#methods-of-file-objects
+# read more about it here:
+# https://docs.python.org/3.7/tutorial/inputoutput.html#methods-of-file-objects
 DEFAULT_WHENCE: int = 0
 
 
@@ -21,19 +22,19 @@ class DiskStorage:
     Implements the KV store on the disk
 
     Args:
-        file_name (str): name of the file where all the data will be written. Just passing the
-            file name will save the data in the current directory. You may pass the
-            full file location too.
+        file_name (str): name of the file where all the data will be written. Just
+            passing the file name will save the data in the current directory. You may
+            pass the full file location too.
 
     Attributes:
-        file_name (str): name of the file where all the data will be written. Just passing the
-            file name will save the data in the current directory. You may pass the
-            full file location too.
-        file (typing.TextIO): file object pointing the file_name
+        file_name (str): name of the file where all the data will be written. Just
+            passing the file name will save the data in the current directory. You may
+            pass the full file location too.
+        file (typing.BinaryIO): file object pointing the file_name
         write_position (int): current cursor position in the file where the data can be
             written
-        key_dir (dict[str, KeyEntry]): is a map of key and KeyEntry being the value. This
-            map acts as in-memory index to fetch the values quickly from the disk
+        key_dir (dict[str, KeyEntry]): is a map of key and KeyEntry being the value.
+            This map acts as in-memory index to fetch the values quickly from the disk
     """
 
     def __init__(self, file_name: str = "data.db"):

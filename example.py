@@ -1,5 +1,3 @@
-import os
-
 from memory_store import MemoryStorage
 from disk_store import DiskStorage
 
