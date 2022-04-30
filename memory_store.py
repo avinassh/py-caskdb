@@ -9,4 +9,4 @@ class MemoryStorage:
         return self.data.get(key, "")
 
     def close(self) -> None:
-        pass
+        return

@@ -15,12 +15,12 @@ class TempStorageFile:
         fd, self.path = tempfile.mkstemp()
         os.close(fd)
 
-    def clean_up(self):
+    def clean_up(self) -> None:
         os.remove(self.path)
 
 
 class TestDiskCDB(unittest.TestCase):
-    def test_get(self):
+    def test_get(self) -> None:
         t = TempStorageFile()
         store = DiskStorage(file_name=t.path)
         store.set("name", "jojo")
@@ -28,7 +28,7 @@ class TestDiskCDB(unittest.TestCase):
         store.close()
         t.clean_up()
 
-    def test_get_new_file(self):
+    def test_get_new_file(self) -> None:
         t = TempStorageFile(path="temp.db")
         store = DiskStorage(file_name=t.path)
         store.set("name", "jojo")
@@ -41,14 +41,14 @@ class TestDiskCDB(unittest.TestCase):
         store.close()
         t.clean_up()
 
-    def test_invalid_key(self):
+    def test_invalid_key(self) -> None:
         t = TempStorageFile()
         store = DiskStorage(file_name=t.path)
         self.assertEqual(store.get("some key"), "")
         store.close()
         t.clean_up()
 
-    def test_persistence(self):
+    def test_persistence(self) -> None:
         t = TempStorageFile()
         store = DiskStorage(file_name=t.path)
 

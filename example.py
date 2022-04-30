@@ -2,14 +2,14 @@ from memory_store import MemoryStorage
 from disk_store import DiskStorage
 
 
-def memory_db():
+def memory_db() -> None:
     store = MemoryStorage()
     print(store.get("name"))
     store.set("name", "jojo")
     print(store.get("name"), "jojo")
 
 
-def store_db():
+def store_db() -> None:
     store = DiskStorage("data.db")
     # on the first run, this will print empty string, but on the next run
     # it should print the value from the disk
@@ -19,8 +19,8 @@ def store_db():
     store.close()
 
 
-def store_books():
-    store = DiskStorage("data.db")
+def store_books() -> None:
+    store = DiskStorage("books.db")
     books = {
         "crime and punishment": "dostoevsky",
         "anna karenina": "tolstoy",
