@@ -15,5 +15,4 @@ class TestInMemoryCDB(unittest.TestCase):
 
     def test_close(self) -> None:
         store = MemoryStorage()
-        self.assertIsNone(store.close())
-        return
+        self.assertTrue(store.close())
