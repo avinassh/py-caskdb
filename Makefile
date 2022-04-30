@@ -4,6 +4,11 @@ run:
 test:
 	python -m unittest discover -vvv ./tests -p '*.py'
 
+lint:
+	black --check --diff .
+	flake8 .
+	mypy .
+
 coverage:
 	coverage run -m unittest discover -vvv ./tests -p '*.py' -b
 	coverage report -m

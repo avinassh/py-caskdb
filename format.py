@@ -38,7 +38,7 @@ class KeyEntry:
 #
 # encode_header encodes these values into bytes.
 def encode_header(timestamp: int, key_size: int, value_size: int) -> bytes:
-    return struct.pack(HEADER_FORMAT, timestamp, key_size, value_size + 1)
+    return struct.pack(HEADER_FORMAT, timestamp, key_size, value_size)
 
 
 # for the current key value pair, this method returns the disk encoded bytes along
