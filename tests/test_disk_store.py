@@ -7,7 +7,6 @@ from disk_store import DiskStorage
 
 
 class TempStorageFile:
-
     def __init__(self, path: typing.Optional[str] = None):
         if path:
             self.path = path
@@ -21,7 +20,6 @@ class TempStorageFile:
 
 
 class TestDiskCDB(unittest.TestCase):
-
     def test_get(self):
         t = TempStorageFile()
         store = DiskStorage(file_name=t.path)
@@ -61,7 +59,7 @@ class TestDiskCDB(unittest.TestCase):
             "hamlet": "shakespeare",
             "othello": "shakespeare",
             "brave new world": "huxley",
-            "dune": "frank herbert"
+            "dune": "frank herbert",
         }
         for k, v in tests.items():
             store.set(k, v)

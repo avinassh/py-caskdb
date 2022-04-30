@@ -30,19 +30,19 @@ def store_books():
         "hamlet": "shakespeare",
         "othello": "shakespeare",
         "brave new world": "huxley",
-        "dune": "frank herbert"
+        "dune": "frank herbert",
     }
     for k, v in books.items():
         store.set(k, v)
-        print(F"set k={k}, v={v}")
-        print(F"get k={k}, v={store.get(k)}")
+        print(f"set k={k}, v={v}")
+        print(f"get k={k}, v={store.get(k)}")
 
     for k in books.keys():
-        print(F"get k={k}, v={store.get(k)}")
+        print(f"get k={k}, v={store.get(k)}")
     store.close()
 
 
-if __name__ == '__main__':
+if __name__ == "__main__":
     # memory_db()
     store_db()
     store_books()

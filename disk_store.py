@@ -43,7 +43,7 @@ class DiskStorage:
         # if the file exists already, then we will load the key_dir
         if os.path.exists(file_name):
             self._init_key_dir()
-        self.file: typing.BinaryIO = open(file_name, 'a+b')
+        self.file: typing.BinaryIO = open(file_name, "a+b")
 
     def set(self, key: str, value: str) -> None:
         timestamp = int(time.time())
@@ -78,10 +78,14 @@ class DiskStorage:
                 key = key_bytes.decode("utf-8")
                 value = value_bytes.decode("utf-8")
                 total_size = HEADER_SIZE + key_size + value_size
-                kv = KeyEntry(timestamp=timestamp, position=self.write_position, total_size=total_size)
+                kv = KeyEntry(
+                    timestamp=timestamp,
+                    position=self.write_position,
+                    total_size=total_size,
+                )
                 self.key_dir[key] = kv
                 self.write_position += total_size
-                print(F"loaded k={key}, v={value}")
+                print(f"loaded k={key}, v={value}")
         print("****----------initialisation complete----------****")
 
     def close(self) -> None:

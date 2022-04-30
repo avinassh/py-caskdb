@@ -4,7 +4,6 @@ from memory_store import MemoryStorage
 
 
 class TestInMemoryCDB(unittest.TestCase):
-
     def test_get(self):
         store = MemoryStorage()
         store.set("name", "jojo")

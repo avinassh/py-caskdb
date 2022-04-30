@@ -11,13 +11,18 @@ from format import encode_header, decode_header, encode_kv, decode_kv, HEADER_SI
 def get_random_header() -> tuple[int, int, int]:
     # we use 4 bytes to store the int, so max value cannot be greater than
     # the following
-    max_size = (2 ** 32) - 1
+    max_size = (2**32) - 1
     random_int: typing.Callable[[], int] = lambda: random.randint(0, max_size)
     return random_int(), random_int(), random_int()
 
 
 def get_random_kv() -> tuple[int, str, str, int]:
-    return int(time.time()), str(uuid.uuid4()), str(uuid.uuid4()), HEADER_SIZE + (2 * len(str(uuid.uuid4())))
+    return (
+        int(time.time()),
+        str(uuid.uuid4()),
+        str(uuid.uuid4()),
+        HEADER_SIZE + (2 * len(str(uuid.uuid4()))),
+    )
 
 
 class Header(typing.NamedTuple):
@@ -57,7 +62,7 @@ class TestHeaderOp(unittest.TestCase):
 
     def test_bad(self) -> None:
         # trying to encode an int with size more than 4 bytes should raise an error
-        self.assertRaises(struct.error, encode_header, 2 ** 32, 5, 5)
+        self.assertRaises(struct.error, encode_header, 2**32, 5, 5)
 
 
 class TestEncodeKV(unittest.TestCase):

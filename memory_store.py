@@ -1,5 +1,4 @@
 class MemoryStorage:
-
     def __init__(self) -> None:
         self.data: dict[str, str] = {}
 
