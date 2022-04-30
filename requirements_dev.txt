@@ -1,0 +1,5 @@
+black>=22.1.0
+coverage>=6.3.2
+flake8>=4.0.1
+ipdb>=0.13.9
+mypy>=0.950
