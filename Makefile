@@ -1,5 +1,19 @@
 run:
-	python3 main.py
+	python3 example.py
 
 test:
-	python3 test.py
+	python -m unittest discover -vvv ./tests -p '*.py'
+
+lint:
+	black --check --diff .
+	flake8 .
+	mypy --strict .
+	pytype .
+
+coverage:
+	coverage run -m unittest discover -vvv ./tests -p '*.py' -b
+	coverage report -m
+
+html: coverage
+	coverage html
+	open htmlcov/index.html
