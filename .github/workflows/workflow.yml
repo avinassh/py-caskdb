@@ -1,6 +1,10 @@
-name: CDB PR Workflow
+name: workflow
 
-on: [pull_request]
+on:
+  push:
+    branches:
+      - 'master'
+  pull_request: {}
 
 jobs:
   lint:
