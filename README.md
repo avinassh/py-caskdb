@@ -6,3 +6,15 @@
 [![GitHub license](https://badgen.net/github/license/Naereen/Strapdown.js)](https://github.com/avinassh/cdb/blob/master/LICENSE)
 
 (educational) build your own disk based KV store
+
+## What Next?
+
+cdb has following the limitations, improving them would be a great challenge for the next step:
+
+- single file
+- add CRC check
+- hint file 
+- using a red-black tree instead of a map
+- multi process 
+- delete support
+- garbage collector

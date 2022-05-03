@@ -6,12 +6,13 @@ import unittest
 import uuid
 
 from format import encode_header, decode_header, encode_kv, decode_kv, HEADER_SIZE
+from format import KeyEntry
 
 
 def get_random_header() -> tuple[int, int, int]:
     # we use 4 bytes to store the int, so max value cannot be greater than
     # the following
-    max_size = (2**32) - 1
+    max_size: int = (2**32) - 1
     random_int: typing.Callable[[], int] = lambda: random.randint(0, max_size)
     return random_int(), random_int(), random_int()
 
@@ -86,3 +87,12 @@ class TestEncodeKV(unittest.TestCase):
         for _ in range(100):
             tt = KeyValue(*get_random_kv())
             self.kv_test(tt)
+
+
+class TestKeyEntry(unittest.TestCase):
+    # dumb test to increase the coverage
+    def test_init(self) -> None:
+        ke = KeyEntry(10, 10, 10)
+        self.assertEqual(ke.timestamp, 10)
+        self.assertEqual(ke.position, 10)
+        self.assertEqual(ke.total_size, 10)
