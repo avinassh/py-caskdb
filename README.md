@@ -18,3 +18,20 @@ cdb has following the limitations, improving them would be a great challenge for
 - multi process 
 - delete support
 - garbage collector
+
+## Line Count
+
+```shell
+$ tokei -f format.py disk_store.py
+
+===============================================================================
+ Language            Files        Lines         Code     Comments       Blanks
+===============================================================================
+ Python                  2          383          255          103           25
+-------------------------------------------------------------------------------
+ disk_store.py                      196          114           70           12
+ format.py                          187          141           33           13
+===============================================================================
+ Total                   2          383          255          103           25
+===============================================================================
+```
