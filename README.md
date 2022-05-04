@@ -5,6 +5,8 @@
 [![codecov](https://codecov.io/gh/avinassh/cdb/branch/master/graph/badge.svg?token=9SA8Q4L7AZ)](https://codecov.io/gh/avinassh/cdb)
 [![GitHub license](https://badgen.net/github/license/Naereen/Strapdown.js)](https://github.com/avinassh/cdb/blob/master/LICENSE)
 
+![architecture](https://user-images.githubusercontent.com/640792/166490746-fb41709e-cdb5-4c9a-a58b-f4e6d530b5c7.png)
+
 (educational) build your own disk based KV store
 
 ## What Next?
