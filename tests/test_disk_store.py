@@ -57,6 +57,12 @@ class TestDiskCDB(unittest.TestCase):
         self.assertEqual(store.get("some key"), "")
         store.close()
 
+    def test_dict_api(self) -> None:
+        store = DiskStorage(file_name=self.file.path)
+        store["name"] = "jojo"
+        self.assertEqual(store["name"], "jojo")
+        store.close()
+
     def test_persistence(self) -> None:
         store = DiskStorage(file_name=self.file.path)
 

@@ -16,6 +16,8 @@ Typical usage example:
     disk: DiskStorage = DiskStore(file_name="books.db")
     disk.set(key="othello", value="shakespeare")
     author: str = disk.get("othello")
+    # it also supports dictionary style API too:
+    disk["hamlet"] = "shakespeare"
 """
 import os.path
 import time
@@ -194,3 +196,9 @@ class DiskStorage:
         self.file.flush()
         os.fsync(self.file.fileno())
         self.file.close()
+
+    def __setitem__(self, key: str, value: str) -> None:
+        return self.set(key, value)
+
+    def __getitem__(self, item: str) -> str:
+        return self.get(item)
