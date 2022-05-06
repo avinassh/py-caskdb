@@ -13,13 +13,6 @@
 
 cdb has following the limitations, improving them would be a great challenge for the next step:
 
-- single file
-- add CRC check
-- hint file 
-- using a red-black tree instead of a map
-- multi process 
-- delete support
-- garbage collector
 
 ## Line Count
 

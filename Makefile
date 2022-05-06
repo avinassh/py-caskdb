@@ -2,7 +2,7 @@ run:
 	python3 example.py
 
 test:
-	python -m unittest discover -vvv ./tests -p '*.py'
+	python -m unittest discover -vvv ./tests -p '*.py' -b
 
 lint:
 	black --check --diff .
@@ -17,3 +17,10 @@ coverage:
 html: coverage
 	coverage html
 	open htmlcov/index.html
+
+clean:
+	python setup.py clean
+	rm -rf build dist cdbpie.egg-info
+
+build: clean
+	python setup.py sdist bdist_wheel
