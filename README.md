@@ -76,7 +76,7 @@ Use `make lint` to run mypy, black, and pytype static analyser. Run `make test` 
 
 ### Hints
 - Check out the documentation of struck-pack for serialisation methods in Python
-- Not sure how to come up with a file format? Read the comment in the format module
+- Not sure how to come up with a file format? Read the comment in the [format module](format.py)
 
 ## What next?
 I often get questions about what is next after the basic implementation. Here are some challenges (with different levels of difficulties)
