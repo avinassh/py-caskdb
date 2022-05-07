@@ -2,12 +2,12 @@
 format module provides encode/decode functions for serialisation and deserialisation
 operations
 
-format module is generic, does not have any disk or memory specific code.
+format module is generic and does not have any disk or memory specific code.
 
 The disk storage deals with bytes; you cannot just store a string or object without
-converting it to bytes. The programming languages provide abstractions where you don't
-have to think about all this when storing things in memory (i.e. RAM). Consider the
-following example where you are storing stuff in a hash table:
+converting it to bytes. The programming languages provide abstractions where you
+don't have to think about all this when storing things in memory (i.e. RAM).
+Consider the following example where you are storing stuff in a hash table:
 
     books = {}
     books["hamlet"] = "shakespeare"
@@ -39,13 +39,13 @@ For the workshop, the functions will have the following signature:
 import struct
 import typing
 
-# Our key value pair when stored on disk looks like this:
+# Our key value pair, when stored on disk looks like this:
 #   ┌───────────┬──────────┬────────────┬─────┬───────┐
 #   │ timestamp │ key_size │ value_size │ key │ value │
 #   └───────────┴──────────┴────────────┴─────┴───────┘
 #
-# This is analogous to a row (or a record) in a typical database. The total length of
-# the row is variable, depending on the contents of key and value.
+# This is analogous to a typical database's row (or a record). The total length of
+# the row is variable, depending on the contents of the key and value.
 #
 # The first three fields form the header:
 #   ┌───────────────┬──────────────┬────────────────┐
@@ -68,7 +68,7 @@ import typing
 # The first argument is a format string, which specifies how the parameters v1, v2, ...
 # should be encoded. `HEADER_FORMAT` is our format string for the header.
 # Check the struct documentation https://docs.python.org/3/library/struct.html
-# to understand how to construct such string.
+# to understand how to construct such a string.
 #
 # `<` - lil endian to be used to encode the integer
 # `L` - represents long unsigned int (4 bytes). We have three fields, hence `LLL`
