@@ -5,8 +5,10 @@ import typing
 import unittest
 import uuid
 
-from format import encode_header, decode_header, encode_kv, decode_kv, HEADER_SIZE
-from format import KeyEntry
+from format import encode_header, decode_header, encode_kv, decode_kv
+
+# TODO: use correct value
+HEADER_SIZE: typing.Final[int] = 0
 
 
 def get_random_header() -> tuple[int, int, int]:
@@ -87,12 +89,3 @@ class TestEncodeKV(unittest.TestCase):
         for _ in range(100):
             tt = KeyValue(*get_random_kv())
             self.kv_test(tt)
-
-
-class TestKeyEntry(unittest.TestCase):
-    # dumb test to increase the coverage
-    def test_init(self) -> None:
-        ke = KeyEntry(10, 10, 10)
-        self.assertEqual(ke.timestamp, 10)
-        self.assertEqual(ke.position, 10)
-        self.assertEqual(ke.total_size, 10)
