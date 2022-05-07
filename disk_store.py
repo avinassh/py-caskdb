@@ -2,14 +2,14 @@
 disk_store module implements DiskStorage class which implements the KV store on the
 disk
 
-DiskStorage provides two simple operations to get and set key value pairs. Both key and
-value needs to be of string type. All the data is persisted to disk. During startup,
-DiskStorage loads all the existing KV pair metadata.  It will throw an error if the
-file is invalid or corrupt.
+DiskStorage provides two simple operations to get and set key value pairs. Both key
+and value need to be of string type, and all the data is persisted to disk.
+During startup, DiskStorage loads all the existing KV pair metadata, and it will
+throw an error if the file is invalid or corrupt.
 
-Do note that if the database file is large, then the initialisation will take time
-accordingly. The initialisation is also a blocking operation, till it is completed
-the DB cannot be used.
+Note that if the database file is large, the initialisation will take time
+accordingly. The initialisation is also a blocking operation; till it is completed,
+we cannot use the database.
 
 Typical usage example:
 
