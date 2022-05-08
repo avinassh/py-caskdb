@@ -39,7 +39,7 @@ class TempStorageFile:
         os.remove(self.path)
 
 
-class TestDiskCDB(unittest.TestCase):
+class TestDiskCaskDB(unittest.TestCase):
     def setUp(self) -> None:
         self.file: TempStorageFile = TempStorageFile()
 
@@ -86,7 +86,7 @@ class TestDiskCDB(unittest.TestCase):
         store.close()
 
 
-class TestDiskCDBExistingFile(unittest.TestCase):
+class TestDiskCaskDBExistingFile(unittest.TestCase):
     def test_get_new_file(self) -> None:
         t = TempStorageFile(path="temp.db")
         store = DiskStorage(file_name=t.path)
