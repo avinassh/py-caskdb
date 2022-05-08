@@ -35,7 +35,7 @@ def store_books() -> None:
         print(f"set k={k}, v={v}")
         print(f"get k={k}, v={store.get(k)}")
 
-    for k in books.keys():
+    for k in books:
         print(f"get k={k}, v={store.get(k)}")
     store.close()
 
