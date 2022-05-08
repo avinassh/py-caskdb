@@ -1,3 +1,5 @@
+FILES_TO_LINT=tests/ *.py
+
 run:
 	python3 example.py
 
@@ -5,10 +7,10 @@ test:
 	python -m unittest discover -vvv ./tests -p '*.py' -b
 
 lint:
-	black --check --diff .
-	flake8 .
-	mypy --strict .
-	pytype .
+	black --check --diff $(FILES_TO_LINT)
+	flake8 $(FILES_TO_LINT)
+	mypy --strict $(FILES_TO_LINT)
+	pytype $(FILES_TO_LINT)
 
 coverage:
 	coverage run -m unittest discover -vvv ./tests -p '*.py' -b
