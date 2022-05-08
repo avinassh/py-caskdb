@@ -1,13 +1,13 @@
-# CDB - Disk based Log Structured Hash Table Store
+# CaskDB - Disk based Log Structured Hash Table Store
 
 ![made-with-python](https://img.shields.io/badge/Made%20with-Python-1f425f.svg)
-[![build](https://github.com/avinassh/cdb/actions/workflows/build.yml/badge.svg)](https://github.com/avinassh/cdb/actions/workflows/build.yml)
-[![codecov](https://codecov.io/gh/avinassh/cdb/branch/master/graph/badge.svg?token=9SA8Q4L7AZ)](https://codecov.io/gh/avinassh/cdb)
-[![MIT license](https://camo.githubusercontent.com/f7358a0a5a91ec17974d36c9d426073a0ac67a958b22319be1ba5aa32542c28d/68747470733a2f2f62616467656e2e6e65742f6769746875622f6c6963656e73652f4e61657265656e2f5374726170646f776e2e6a73)](https://github.com/avinassh/cdb/blob/master/LICENSE)
+[![build](https://github.com/avinassh/py-caskdb/actions/workflows/build.yml/badge.svg)](https://github.com/avinassh/py-caskdb/actions/workflows/build.yml)
+[![codecov](https://codecov.io/gh/avinassh/py-caskdb/branch/master/graph/badge.svg?token=9SA8Q4L7AZ)](https://codecov.io/gh/avinassh/py-caskdb)
+[![MIT license](https://camo.githubusercontent.com/f7358a0a5a91ec17974d36c9d426073a0ac67a958b22319be1ba5aa32542c28d/68747470733a2f2f62616467656e2e6e65742f6769746875622f6c6963656e73652f4e61657265656e2f5374726170646f776e2e6a73)](https://github.com/avinassh/py-caskdb/blob/master/LICENSE)
 
-![architecture](https://user-images.githubusercontent.com/640792/166490746-fb41709e-cdb5-4c9a-a58b-f4e6d530b5c7.png)
+![architecture](https://user-images.githubusercontent.com/640792/167299554-0fc44510-d500-4347-b680-258e224646fa.png)
 
-cdb is a  disk-based, embedded, persistent, key-value store based on the [Riak's bitmask paper](https://riak.com/assets/bitcask-intro.pdf), written in Python. It is more focused on the educational capabilities than using it in production. The file format is platform, machine, and programming language independent. Say, the database file created from Python on macOS should be compatible with Rust on Windows.
+CaskDB is a  disk-based, embedded, persistent, key-value store based on the [Riak's bitmask paper](https://riak.com/assets/bitcask-intro.pdf), written in Python. It is more focused on the educational capabilities than using it in production. The file format is platform, machine, and programming language independent. Say, the database file created from Python on macOS should be compatible with Rust on Windows.
 
 This project aims to help anyone, even a beginner in databases, build a persistent database in a few hours. There are no external dependencies; only the Python standard library is enough.
 
@@ -21,20 +21,20 @@ If you are interested in writing the database yourself, head to the workshop sec
 - Store data much larger than the RAM
 
 ## Limitations
-Most of the following limitations are of cdb. However, there are some due to design constraints by the Bitcask paper.
+Most of the following limitations are of CaskDB. However, there are some due to design constraints by the Bitcask paper.
 
 - Single file stores all data, and deleted keys still take up the space
-- cdb does not offer range scans
-- cdb requires keeping all the keys in the internal memory. With a lot of keys, RAM usage will be high 
+- CaskDB does not offer range scans
+- CaskDB requires keeping all the keys in the internal memory. With a lot of keys, RAM usage will be high 
 - Slow startup time since it needs to load all the keys in memory
 
 ## Dependencies
-cdb does not require any external libraries to run. For local development, install the packages from [requirements_dev.txt](requirements_dev.txt):
+CaskDB does not require any external libraries to run. For local development, install the packages from [requirements_dev.txt](requirements_dev.txt):
 	
 	pip install -r requirements_dev.txt
 
 ## Installation
-PyPi is not used for cdb yet ([issue #5](https://github.com/avinassh/cdb/pull/5)), and you'd have to install it directly from the repository by cloning.
+PyPi is not used for CaskDB yet ([issue #5](https://github.com/avinassh/py-caskdb/pull/5)), and you'd have to install it directly from the repository by cloning.
 
 ## Usage
 
@@ -57,20 +57,20 @@ Not sure where you stand? You are ready if you have done the following in any la
 ## Workshop
 **NOTE:** I don't have any [workshops](workshop.md) scheduled shortly. [Follow me on Twitter](https://twitter.com/iavins/) for updates. [Drop me an email](http://scr.im/avii) if you wish to arrange a workshop for your team/company.
 
-cdb comes with a full test suite and a wide range of tools to help you write a database quickly. [A Github action](https://github.com/avinassh/cdb/blob/master/.github/workflows/build.yml) is present with an automated tests runner, code formatter, linter, type checker and static analyser. Fork the repo, push the code, and pass the tests!
+CaskDB comes with a full test suite and a wide range of tools to help you write a database quickly. [A Github action](https://github.com/avinassh/py-caskdb/blob/master/.github/workflows/build.yml) is present with an automated tests runner, code formatter, linter, type checker and static analyser. Fork the repo, push the code, and pass the tests!
 
 Throughout the workshop, you will implement the following:
 - Serialiser methods take a bunch of objects and serialise them into bytes. Also, the procedures take a bunch of bytes and deserialise them back to the things.
 - Come up with a data format with a header and data to store the bytes on the disk. The header would contain metadata like timestamp, key size, and value.
 - Store and retrieve data from the disk
-- Read an existing cdb file to load all keys
+- Read an existing CaskDB file to load all keys
 
 ### Tasks
 1. Read [the paper](https://riak.com/assets/bitcask-intro.pdf). Fork this repo and checkout the `start-here` branch
 2. Implement the fixed-sized header, which can encode timestamp (uint, 4 bytes), key size (uint, 4 bytes), value size (uint, 4 bytes) together
 3. Implement the key, value serialisers, and pass the tests from `test_format.py`
 4. Figure out how to store the data on disk and the row pointer in the memory. Implement the get/set operations. Tests for the same are in `test_disk_store.py`
-5. Code from the task #2 and #3 should be enough to read an existing cdb file and load the keys into memory
+5. Code from the task #2 and #3 should be enough to read an existing CaskDB file and load the keys into memory
 
 Use `make lint` to run mypy, black, and pytype static analyser. Run `make test` to run the tests locally. Push the code to Github, and tests will run on different OS: ubuntu, mac, and windows.
 
@@ -83,9 +83,9 @@ I often get questions about what is next after the basic implementation. Here ar
 
 ### Level 1:
 - Crash safety: the bitcask paper stores CRC in the row, and while fetching the row back, it verifies the data
-- Key deletion: cdb does not have a delete API. Read the paper and implement it
+- Key deletion: CaskDB does not have a delete API. Read the paper and implement it
 - Instead of using a hash table, use a data structure like the red-black tree to support range scans
-- cdb accepts only strings as keys and values. Make it generic and take other data structures like int or bytes.
+- CaskDB accepts only strings as keys and values. Make it generic and take other data structures like int or bytes.
 
 ### Level 2:
 - Hint file to improve the startup time. The paper has more details on it
@@ -96,11 +96,11 @@ I often get questions about what is next after the basic implementation. Here ar
 - Support for multiple processes
 - Garbage collector: keys which got updated and deleted remain in the file and take up space. Write a garbage collector to remove such stale data
 - Add SQL query engine layer
-- Store JSON in values and explore making cdb as a document database like Mongo
-- Make cdb distributed by exploring algorithms like raft, paxos, or consistent hashing
+- Store JSON in values and explore making CaskDB as a document database like Mongo
+- Make CaskDB distributed by exploring algorithms like raft, paxos, or consistent hashing
 
 ## Name
-cdb is an acronym for Cask Database, and it is not related to [D. J. Bernstein's cdb](https://cr.yp.to/cdb.html). I don't expect this to get popular or used in production environments, and naming things is hard 🥺.
+This project was named cdb earlier and now renamed to CaskDB.
 
 ## Line Count
 

@@ -3,7 +3,7 @@ import unittest
 from memory_store import MemoryStorage
 
 
-class TestInMemoryCDB(unittest.TestCase):
+class TestInMemoryCaskDB(unittest.TestCase):
     def test_get(self) -> None:
         store = MemoryStorage()
         store.set("name", "jojo")
