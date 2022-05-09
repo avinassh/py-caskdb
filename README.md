@@ -7,7 +7,7 @@
 
 ![architecture](https://user-images.githubusercontent.com/640792/167299554-0fc44510-d500-4347-b680-258e224646fa.png)
 
-CaskDB is a  disk-based, embedded, persistent, key-value store based on the [Riak's bitmask paper](https://riak.com/assets/bitcask-intro.pdf), written in Python. It is more focused on the educational capabilities than using it in production. The file format is platform, machine, and programming language independent. Say, the database file created from Python on macOS should be compatible with Rust on Windows.
+CaskDB is a  disk-based, embedded, persistent, key-value store based on the [Riak's bitcask paper](https://riak.com/assets/bitcask-intro.pdf), written in Python. It is more focused on the educational capabilities than using it in production. The file format is platform, machine, and programming language independent. Say, the database file created from Python on macOS should be compatible with Rust on Windows.
 
 This project aims to help anyone, even a beginner in databases, build a persistent database in a few hours. There are no external dependencies; only the Python standard library is enough.
 
