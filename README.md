@@ -74,8 +74,10 @@ Throughout the workshop, you will implement the following:
 
 Use `make lint` to run mypy, black, and pytype static analyser. Run `make test` to run the tests locally. Push the code to Github, and tests will run on different OS: ubuntu, mac, and windows.
 
+Not sure how to proceed? Then check the [hints](hints.md) file which contains more details on the tasks and hints.
+
 ### Hints
-- Check out the documentation of struck-pack for serialisation methods in Python
+- Check out the documentation of [struck.pack](https://docs.python.org/3/library/struct.html#struct.pack) for serialisation methods in Python
 - Not sure how to come up with a file format? Read the comment in the [format module](format.py)
 
 ## What next?
