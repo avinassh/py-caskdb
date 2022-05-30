@@ -102,8 +102,7 @@ class DiskStorage:
 
     def set(self, key: str, value: str) -> None:
         """
-        get retrieves the value from the disk and returns. If the key does not exist
-        then it returns an empty string
+        set stores the key and value on the disk
 
         Args:
             key (str): the key
