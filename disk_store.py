@@ -153,6 +153,7 @@ class DiskStorage:
         # saving stuff to a file reliably is hard!
         # if you would like to explore and learn more, then
         # start from here: https://danluu.com/file-consistency/
+        # and read this too: https://lwn.net/Articles/457667/
         self.file.write(data)
         # we need to call flush after every write so that our data is moved from
         # runtime buffer to the os buffer
