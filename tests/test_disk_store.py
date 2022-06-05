@@ -85,6 +85,31 @@ class TestDiskCaskDB(unittest.TestCase):
             self.assertEqual(store.get(k), v)
         store.close()
 
+    def test_deletion(self) -> None:
+        store = DiskStorage(file_name=self.file.path)
+
+        tests = {
+            "crime and punishment": "dostoevsky",
+            "anna karenina": "tolstoy",
+            "war and peace": "tolstoy",
+            "hamlet": "shakespeare",
+            "othello": "shakespeare",
+            "brave new world": "huxley",
+            "dune": "frank herbert",
+        }
+        for k, v in tests.items():
+            store.set(k, v)
+        for k, _ in tests.items():
+            store.set(k, "")
+        store.set("end", "yes")
+        store.close()
+
+        store = DiskStorage(file_name=self.file.path)
+        for k, v in tests.items():
+            self.assertEqual(store.get(k), "")
+        self.assertEqual(store.get("end"), "yes")
+        store.close()
+
 
 class TestDiskCaskDBExistingFile(unittest.TestCase):
     def test_get_new_file(self) -> None:
