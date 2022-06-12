@@ -1,3 +1,4 @@
+![logo](assets/logo.svg)
 # CaskDB - Disk based Log Structured Hash Table Store
 
 ![made-with-python](https://img.shields.io/badge/Made%20with-Python-1f425f.svg)
