@@ -22,8 +22,9 @@ Typical usage example:
 import os.path
 import time
 import typing
+from dataclasses import dataclass
 
-from format import encode_kv, decode_kv, decode_header
+from format import encode_kv, decode_kv, decode_header, HEADER_SIZE
 
 
 # DiskStorage is a Log-Structured Hash Table as described in the BitCask paper. We
@@ -53,6 +54,13 @@ from format import encode_kv, decode_kv, decode_header
 # Read the paper for more details: https://riak.com/assets/bitcask-intro.pdf
 
 
+@dataclass
+class Value:
+    position: int
+    timestamp: int
+    size: int
+
+
 class DiskStorage:
     """
     Implements the KV store on the disk
@@ -63,20 +71,66 @@ class DiskStorage:
             pass the full file location too.
     """
 
+    disk_file: typing.BinaryIO
+    append_position: int = 0
+    key_dir: dict[str, Value] = {}
+
     def __init__(self, file_name: str = "data.db"):
-        raise NotImplementedError
+        """
+        1. check if file exists. if not, create the file
+        2. initialize in memory storage from file
+        :param file_name:
+        """
+        if os.path.exists(file_name):
+            self._make_key_dir(file_name)
+        self.disk_file = open(file_name, "ab+")
 
     def set(self, key: str, value: str) -> None:
-        raise NotImplementedError
+        timestamp = int(time.time())
+        size, row_to_write = encode_kv(timestamp, key, value)
+
+        val = Value(position=self.append_position, timestamp=timestamp, size=size)
+
+        self.disk_file.write(row_to_write)
+        self.disk_file.flush()
+        self.append_position = self.append_position + size
+        self.key_dir[key] = val
 
     def get(self, key: str) -> str:
-        raise NotImplementedError
+        val = self.key_dir.get(key, None)
+        if not val:
+            return ""
+        self.disk_file.seek(val.position)
+        bytes_to_decode = self.disk_file.read(val.size)
+        _, _, value = decode_kv(bytes_to_decode)
+
+        self.disk_file.seek(self.append_position)
+
+        return value
 
     def close(self) -> None:
-        raise NotImplementedError
+        self.disk_file.flush()
+        self.disk_file.close()
 
     def __setitem__(self, key: str, value: str) -> None:
         return self.set(key, value)
 
     def __getitem__(self, item: str) -> str:
         return self.get(item)
+
+    def _make_key_dir(self, file_name: str) -> None:
+        print(f"populating key_dir from {file_name}")
+        with open(file_name, "rb") as f:
+            while header := f.read(HEADER_SIZE):
+                timestamp, key_size, value_size = decode_header(header)
+                row_size = HEADER_SIZE + key_size + value_size
+                val = Value(
+                    timestamp=timestamp, position=self.append_position, size=row_size
+                )
+                self.append_position = self.append_position + row_size
+                key = f.read(key_size).decode("utf-8")
+
+                # skip value_size to ignore actual value data
+                _ = f.read(value_size)
+                print(f"storing {key} in key_dir")
+                self.key_dir[key] = val

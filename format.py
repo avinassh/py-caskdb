@@ -36,18 +36,35 @@ For the workshop, the functions will have the following signature:
     def decode_kv(data: bytes) -> tuple[int, str, str]
 """
 
+import struct
+import typing
+
+
+HEADER_FMT: typing.Final[str] = "<LLL"
+HEADER_SIZE: typing.Final[int] = 12
+
 
 def encode_header(timestamp: int, key_size: int, value_size: int) -> bytes:
-    raise NotImplementedError
+    return struct.pack(HEADER_FMT, timestamp, key_size, value_size)
 
 
 def encode_kv(timestamp: int, key: str, value: str) -> tuple[int, bytes]:
-    raise NotImplementedError
+    header: bytes = encode_header(timestamp, len(key), len(value))
+    data: bytes = b"".join([str.encode(key), str.encode(value)])
+    return HEADER_SIZE + len(data), header + data
 
 
 def decode_kv(data: bytes) -> tuple[int, str, str]:
-    raise NotImplementedError
+    timestamp, key_size, value_size = decode_header(data[:HEADER_SIZE])
+    enc_key = data[HEADER_SIZE : HEADER_SIZE + key_size]
+    enc_value = data[HEADER_SIZE + key_size : HEADER_SIZE + key_size + value_size]
+
+    dec_key = enc_key.decode("utf-8")
+    dec_value = enc_value.decode("utf-8")
+
+    return timestamp, dec_key, dec_value
 
 
 def decode_header(data: bytes) -> tuple[int, int, int]:
-    raise NotImplementedError
+    timestamp, key_size, value_size = struct.unpack(HEADER_FMT, data)
+    return timestamp, key_size, value_size

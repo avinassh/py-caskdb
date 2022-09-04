@@ -7,8 +7,7 @@ import uuid
 
 from format import encode_header, decode_header, encode_kv, decode_kv
 
-# TODO: use correct value
-HEADER_SIZE: typing.Final[int] = 0
+HEADER_SIZE: typing.Final[int] = 12
 
 
 def get_random_header() -> tuple[int, int, int]:
