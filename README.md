@@ -90,6 +90,7 @@ I often get questions about what is next after the basic implementation. Here ar
 - Key deletion: CaskDB does not have a delete API. Read the paper and implement it
 - Instead of using a hash table, use a data structure like the red-black tree to support range scans
 - CaskDB accepts only strings as keys and values. Make it generic and take other data structures like int or bytes.
+- While startup, current implementation loads values into memory. This is unnecessary and can be avoided. Just skip the value bytes and reading just the keys enough to build KeyDir
 
 ### Level 2:
 - Hint file to improve the startup time. The paper has more details on it
