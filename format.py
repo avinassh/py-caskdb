@@ -35,19 +35,39 @@ For the workshop, the functions will have the following signature:
     def encode_kv(timestamp: int, key: str, value: str) -> tuple[int, bytes]
     def decode_kv(data: bytes) -> tuple[int, str, str]
 """
+import struct
+
+
+HEADER_FORMAT = ">III"
+HEADER_SIZE = struct.calcsize(HEADER_FORMAT)
+VALUE_FORMAT = ">{ksz}s{vsz}s"
 
 
 def encode_header(timestamp: int, key_size: int, value_size: int) -> bytes:
-    raise NotImplementedError
+    return struct.pack(HEADER_FORMAT, timestamp, key_size, value_size)
 
 
 def encode_kv(timestamp: int, key: str, value: str) -> tuple[int, bytes]:
-    raise NotImplementedError
+    ksz, vsz = len(key), len(value)
+    header = encode_header(timestamp, ksz, vsz)
+    body = struct.pack(
+        VALUE_FORMAT.format(ksz=ksz, vsz=vsz), key.encode(), value.encode()
+    )
+
+    result = header + body
+    rsz = len(result)
+
+    return rsz, result
 
 
 def decode_kv(data: bytes) -> tuple[int, str, str]:
-    raise NotImplementedError
+    timestamp, ksz, vsz = struct.unpack_from(HEADER_FORMAT, data)
+    bkey, bvalue = struct.unpack_from(
+        VALUE_FORMAT.format(ksz=ksz, vsz=vsz), data, offset=HEADER_SIZE
+    )
+    key, value = bkey.decode(), bvalue.decode()
+    return timestamp, key, value
 
 
 def decode_header(data: bytes) -> tuple[int, int, int]:
-    raise NotImplementedError
+    return struct.unpack(HEADER_FORMAT, data)
