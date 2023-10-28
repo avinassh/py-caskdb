@@ -12,6 +12,16 @@ Do *NOT* club multiple things into a single PR. This adds unnecessary work for m
 
 Thank you!
 
+## Branches
+
+- `start-here` contains all the base challenges and test cases
+- `master` implements the base challenges
+- `final` implements challenges from different levels
+
+If your PR is a bug/typo fix, open a PR with `master` as the base. I will backport the changes to `start-here` and `final` once merged.
+
+If you are implementing something new, open a PR with `final` as the base.
+
 ## "I am new; how do I get started?"
 
 Pick any challenge from any level and open a GitHub issue to discuss. I am happy to provide more resources/research papers to understand a particular concept.
