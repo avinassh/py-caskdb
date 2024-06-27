@@ -1,5 +1,5 @@
-from memory_store import MemoryStorage
-from disk_store import DiskStorage
+from caskdb.memory_store import MemoryStorage
+from caskdb.disk_store import DiskStorage
 
 
 def memory_db() -> None:

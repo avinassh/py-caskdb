@@ -19,11 +19,12 @@ Typical usage example:
     # it also supports dictionary style API too:
     disk["hamlet"] = "shakespeare"
 """
+
 import os.path
 import time
 import typing
 
-from format import KeyEntry, encode_kv, decode_kv, HEADER_SIZE, decode_header
+from caskdb.format import KeyEntry, encode_kv, decode_kv, HEADER_SIZE, decode_header
 
 # We use `file.seek` method to move our cursor to certain byte offset for read
 # or write operations. The method takes two parameters file.seek(offset, whence).

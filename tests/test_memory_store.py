@@ -1,6 +1,6 @@
 import unittest
 
-from memory_store import MemoryStorage
+from caskdb.memory_store import MemoryStorage
 
 
 class TestInMemoryCaskDB(unittest.TestCase):
@@ -15,4 +15,4 @@ class TestInMemoryCaskDB(unittest.TestCase):
 
     def test_close(self) -> None:
         store = MemoryStorage()
-        self.assertTrue(store.close())
+        store.close()

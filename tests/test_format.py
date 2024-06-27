@@ -5,8 +5,14 @@ import typing
 import unittest
 import uuid
 
-from format import encode_header, decode_header, encode_kv, decode_kv, HEADER_SIZE
-from format import KeyEntry
+from caskdb.format import (
+    encode_header,
+    decode_header,
+    encode_kv,
+    decode_kv,
+    HEADER_SIZE,
+)
+from caskdb.format import KeyEntry
 
 
 def get_random_header() -> tuple[int, int, int]:
