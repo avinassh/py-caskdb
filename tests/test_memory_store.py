@@ -1,6 +1,6 @@
 import unittest
 
-from caskdb.memory_store import MemoryStorage
+from caskdb import MemoryStorage
 
 
 class TestInMemoryCaskDB(unittest.TestCase):
