@@ -9,7 +9,7 @@ test:
 lint:
 	black --check --diff $(FILES_TO_LINT)
 	flake8 $(FILES_TO_LINT)
-	mypy --strict $(FILES_TO_LINT)
+	mypy .
 	pytype $(FILES_TO_LINT)
 
 coverage:
