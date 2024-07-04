@@ -80,7 +80,7 @@ Throughout the workshop, you will implement the following:
 4. Figure out how to store the data on disk and the row pointer in the memory. Implement the get/set operations. Tests for the same are in `test_disk_store.py`
 5. Code from the task #2 and #3 should be enough to read an existing CaskDB file and load the keys into memory
 
-Use `make lint` to run mypy, black, and pytype static analyser. Run `make test` to run the tests locally. Push the code to Github, and tests will run on different OS: ubuntu, mac, and windows.
+Use `make lint` to run mypy and black. Run `make test` to run the tests locally. Push the code to Github, and tests will run on different OS: ubuntu, mac, and windows.
 
 Not sure how to proceed? Then check the [hints](hints.md) file which contains more details on the tasks and hints.
 
