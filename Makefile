@@ -10,6 +10,7 @@ lint:
 	black --check --diff $(FILES_TO_LINT)
 	flake8 $(FILES_TO_LINT)
 	mypy .
+	pytype $(FILES_TO_LINT)
 
 coverage:
 	coverage run -m unittest discover -vvv ./tests -p '*.py' -b
