@@ -3,7 +3,7 @@ import tempfile
 import typing
 import unittest
 
-from disk_store import DiskStorage
+from caskdb import DiskStorage
 
 
 class TempStorageFile:
