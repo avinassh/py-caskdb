@@ -47,7 +47,7 @@ PyPi is not used for CaskDB yet ([issue #5](https://github.com/avinassh/py-caskd
 ## Usage
 
 ```python
-disk: DiskStorage = DiskStore(file_name="books.db")
+disk: DiskStorage = DiskStorage(file_name="books.db")
 disk.set(key="othello", value="shakespeare")
 author: str = disk.get("othello")
 # it also supports dictionary style API too:
